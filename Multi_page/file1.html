@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Sort it - Organic Food HTML5 Template" />
+    <meta name="description" content="Sort it - Organic Food HTML5 Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <title>Sort it - Organic Food HTML5 Template</title>
+
+    <!-- FavIcon Link -->
+    <link
+      rel="icon"
+      href="assets/images/favicon.png"
+      sizes="32x32"
+      type="image/png"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+
+    <!-- Swiper Slider CSS Link -->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+    <!-- Fancybox CSS Link -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/jquery.fancybox.min.css"
+    />
+
+    <!-- Main Style CSS Link -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #166534;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .recipe-hero {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .recipe-image:hover {
+            transform: scale(1.05);
+        }
+
+        .recipe-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+
+        .recipe-title {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .recipe-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .recipe-sections {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #166534;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #166534;
+            margin: 15px auto;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ingredients-list li {
+            padding: 15px 0;
+            border-bottom: 1px dashed #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .ingredients-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .ingredient-name {
+            font-size: 1.1rem;
+        }
+
+        .ingredient-amount {
+            color: #166534;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .preparation-steps {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+            counter-reset: step-counter;
+        }
+
+        .preparation-steps li {
+            margin-bottom: 30px;
+            padding-left: 60px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: calc(var(--step-index) * 0.1s);
+        }
+
+        .preparation-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background-color: #166534;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.3s ease;
+        }
+
+        .preparation-steps li:hover::before {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .recipe-image {
+                height: 300px;
+            }
+            
+            .recipe-content {
+                padding: 30px;
+            }
+            
+            .recipe-meta {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .recipe-title {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header-logo">
+                        <a title="Sort it" href="index.html">
+                            <img width="100" height="50" src="assets/images/logo for blue.jpg" alt="Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="main-navigation">
+                        <button class="menu-toggle"><span></span><span></span></button>
+                        <div class="header-menu">
+                            <ul class="menu">
+                                <li><a title="Home" class="active-menu" href="index.html">Home</a></li>
+                                <li><a title="About" href="about-us.html">About</a></li>
+                                <li><a title="Menu" href="our-menu.html">Recipe</a></li>
+                                <li><a title="Gallery" href="gallery.html">Gallery</a></li>
+                                <li><a title="Contact" href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">        
+        <div class="recipe-hero" style="margin-top: 150px;">
+            <div class="recipe-grid" data-aos="fade-up" data-aos-duration="1000">
+                <img src="/Multi_page/assets/images/about-img.jpg" alt="Vegan quinoa bowl" class="recipe-image">
+                
+                <div class="recipe-content">
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                            <span>20min</span>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <svg class="meta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <span>4 Servings</span>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <svg class="meta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                            <span>Medium</span>
+                        </div>
+                    </div>
+
+                    <h1 class="recipe-title">Fresh Pasta and Healthy salad</h1>
+                    <p class="recipe-description">A delightful blend of fluffy quinoa, fresh vegetables, and protein-rich chickpeas, dressed in a zesty lemon vinaigrette. Perfect for a healthy lunch or light dinner.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recipe-sections">
+            <section class="section" data-aos="fade-up" data-aos-duration="3000">
+                <h2 class="section-title">Ingredients</h2>
+                <ul class="ingredients-list">
+                    <li>
+                        <span class="ingredient-name">Quinoa</span>
+                        <span class="ingredient-amount">1 cup</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Chickpeas</span>
+                        <span class="ingredient-amount">1 can</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Cherry tomatoes</span>
+                        <span class="ingredient-amount">1 cup</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Cucumber</span>
+                        <span class="ingredient-amount">1 medium</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Avocado</span>
+                        <span class="ingredient-amount">1 large</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Olive oil</span>
+                        <span class="ingredient-amount">2 tbsp</span>
+                    </li>
+                    <li>
+                        <span class="ingredient-name">Lemon juice</span>
+                        <span class="ingredient-amount">1 tbsp</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="section" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="section-title">Preparation</h2>
+                <ol class="preparation-steps">
+                    <li style="--step-index: 1">Rinse quinoa thoroughly and cook according to package instructions. Usually 2 parts water to 1 part quinoa for about 15-20 minutes until fluffy.</li>
+                    <li style="--step-index: 2">While quinoa is cooking, drain and rinse chickpeas. Slice cherry tomatoes in half and dice cucumber into small cubes.</li>
+                    <li style="--step-index: 3">In a small bowl, whisk together olive oil, lemon juice, salt, and pepper to make the dressing.</li>
+                    <li style="--step-index: 4">Once quinoa is cooked, let it cool for 5 minutes, then fluff with a fork.</li>
+                    <li style="--step-index: 5">In a large bowl, combine the cooked quinoa, chickpeas, tomatoes, and cucumber.</li>
+                    <li style="--step-index: 6">Pour the dressing over the mixture and toss gently to combine.</li>
+                    <li style="--step-index: 7">Just before serving, slice the avocado and arrange on top of each portion.</li>
+                </ol>
+            </section>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init();
+      </script>
+
+    <!-- Jquery JS Link -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS Link -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+
+    <!-- Font Awesome JS Link -->
+    <script src="assets/js/font-awesome.min.js"></script>
+
+    <!-- Swiper Slider JS Link -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+
+    <!-- Mixitup js Link -->
+    <script src="assets/js/jquery.mixitup.min.js"></script>
+
+    <!-- Fancybox JS Link -->
+    <script src="assets/js/jquery.fancybox.min.js"></script>
+
+    <!-- Parallax JS Link -->
+    <script src="assets/js/parallax.min.js"></script>
+
+    <!-- GSAP JS Link -->
+    <script src="assets/js/gsap.min.js"></script>
+
+    <!-- ScrollTrigger JS Link -->
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+
+    <!-- ScrollToPlugin JS Link -->
+    <script src="assets/js/ScrollToPlugin.min.js"></script>
+
+    <!-- Rellax JS Link -->
+    <script src="assets/js/rellax.min.js"></script>
+
+    <!-- Rellax Custom JS Link -->
+    <script src="assets/js/rellax-custom.js"></script>
+
+    <!-- Smooth Scroll JS Link -->
+    <script src="assets/js/smooth-scroll.js"></script>
+
+    <!-- Custom JS Link -->
+    <script src="assets/js/custom.js"></script>
+</body>
+</html>
